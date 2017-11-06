@@ -11,10 +11,11 @@ public class Principal {
 
     /**
      * Realiza a intercação sem sentinela
-     * @param A
-     * @param p
-     * @param q
-     * @param r 
+     *
+     * @param A Vetor a ser ordenado
+     * @param p Inicio do vetor
+     * @param q Pivo do vetor
+     * @param r Fim do vetor
      */
     public static void merge(int A[], int p, int q, int r) {
         int B[] = new int[r + 1];
@@ -39,11 +40,11 @@ public class Principal {
     }
 
     /**
-     * Mergesort sem sentinela
-     * Complexidade no pior caso é Theta(n log n)
-     * @param A
-     * @param p
-     * @param r 
+     * Mergesort sem sentinela Complexidade no pior caso é Theta(n log n)
+     *
+     * @param A Vetor a ser ordenado
+     * @param p Inicio do vetor
+     * @param r Fim do vetor
      */
     public static void mergesort(int A[], int p, int r) {
         if (p < r) {                    //Theta(1)
@@ -60,7 +61,7 @@ public class Principal {
 
         //Fim do vetor
         int n = A.length - 1;
-        
+
         System.out.println(">>> MergeSort <<<");
         System.out.println("Original: ");
         for (int i = 0; i <= n; i++) {
