@@ -40,7 +40,8 @@ public class Principal {
     }
 
     /**
-     * Mergesort sem sentinela Complexidade no pior caso é Theta(n log n)
+     * Mergesort sem sentinela 
+     * Complexidade no pior caso é Theta(n log n)
      *
      * @param A Vetor a ser ordenado
      * @param p Inicio do vetor
