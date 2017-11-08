@@ -4,7 +4,7 @@
  * Programa de Pós-Graduação em Ciências da Computação - PROPG
  * Disciplinas: Projeto e Análise de Algoritmos
  * Prof Alexandre Gonçalves da Silva 
- * Baseado nos slides 36 da aula do dia 18/01/2017 
+ * Baseado nos slides 36 da aula do dia 18/08/2017 
  * Mergesort sem sentinela
  */
 public class Principal {
@@ -18,13 +18,14 @@ public class Principal {
      * @param r Fim do vetor
      */
     public static void merge(int A[], int p, int q, int r) {
-        int B[] = new int[r + 1];
+        int B[] = new int[r + 1]; 
+        
         for (int i = p; i <= q; i++) {
             B[i] = A[i];
         }
 
         for (int j = q + 1; j <= r; j++) {
-            B[r + q + 1 - j] = A[j];
+            B[r + (q + 1) - j] = A[j];
         }
         int i = p;
         int j = r;
@@ -64,8 +65,8 @@ public class Principal {
     public static void main(String args[]) {
         //Vetor dos dados    
         int A[] = {50, 70, 60, 90, 10, 30, 20, 40};
-
-        //Fim do vetor
+        
+        //Apesar de haver n elementos, r é o ÍNDICE, logo, n-1 é a sua posição!
         int n = A.length - 1;
 
         System.out.println(">>> MergeSort <<<");
