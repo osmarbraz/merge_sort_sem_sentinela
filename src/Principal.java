@@ -4,11 +4,38 @@
  * Programa de Pós-Graduação em Ciências da Computação - PROPG
  * Disciplinas: Projeto e Análise de Algoritmos
  * Prof Alexandre Gonçalves da Silva 
+ *
  * Baseado nos slides 36 da aula do dia 18/08/2017 
+ *
  * Mergesort sem sentinela
+ *
+ * Atenção:
+ * Vetor em java inicia em 0, os algoritmos consideram início em 1.
+ * A subtraçào de -1 ocorre somente no local de acesso ao vetor ou matriz 
+ * para manter a compatibilidade entre os algoritmos.
+ *
  */
 public class Principal {
 
+    /**
+     * O piso (= floor) de um número real x é o resultado do arredondamento de x
+     * para baixo. Em outras palavras, o piso de x é o único número inteiro i
+     * tal que i<=x<i+1. Ex. O piso de 3.9 é 3.
+     *
+     * Em java pode ser utilizando Math.floor(double)
+     *
+     * @param x Numero real a ser cálculado o piso.
+     * @return um valor inteiro com o piso de x.
+     */
+    public static int piso(double x) {
+        //Pego a parte inteira de x
+        int parteInteira = (int) x;
+        //Pego a parte fracionária de x
+        double parteFracionaria = x - parteInteira;
+        //Retorno x subtraindo a parte fracionaria 
+        return (int) (x - parteFracionaria);
+    }    
+    
     /**
      * Realiza a intercação sem sentinela
      *
@@ -18,23 +45,21 @@ public class Principal {
      * @param r Fim do vetor
      */
     public static void merge(int A[], int p, int q, int r) {
-        int B[] = new int[r + 1]; 
-        
+        int B[] = new int[r + 1];         
         for (int i = p; i <= q; i++) {
-            B[i] = A[i];
+            B[i-1] = A[i-1];
         }
-
         for (int j = q + 1; j <= r; j++) {
-            B[r + (q + 1) - j] = A[j];
+            B[r + (q + 1) - j - 1] = A[j-1];
         }
         int i = p;
         int j = r;
         for (int k = p; k <= r; k++) {
-            if (B[i] <= B[j]) {
-                A[k] = B[i];
+            if (B[i-1] <= B[j-1]) {
+                A[k-1] = B[i-1];
                 i = i + 1;
             } else {
-                A[k] = B[j];
+                A[k-1] = B[j-1];
                 j = j - 1;
             }
         }
@@ -55,7 +80,7 @@ public class Principal {
      */
     public static void mergesort(int A[], int p, int r) {
         if (p < r) {                    //Theta(1)
-            int q = (p + r) / 2;        //Theta(1)
+            int q = piso((p + r) / 2);  //Theta(1)
             mergesort(A, p, q);         //T(n/2)
             mergesort(A, q + 1, r);     //T(n/2)
             merge(A, p, q, r);          //Theta(n)
@@ -63,24 +88,25 @@ public class Principal {
     }
 
     public static void main(String args[]) {
+        
         //Vetor dos dados    
         int A[] = {50, 70, 60, 90, 10, 30, 20, 40};
+        //Quantidade de elementos       
+        int r = A.length;
+        //Início do vetor
+        int p = 1;
         
-        //Apesar de haver n elementos, r é o ÍNDICE, logo, n-1 é a sua posição!
-        int n = A.length - 1;
-
-        System.out.println(">>> MergeSort <<<");
+        System.out.println(">>> MergeSort sem sentinela <<<");
         System.out.println("Original: ");
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i < r; i++) {
             System.out.println((i + 1) + " - " + A[i]);
         }
 
-        mergesort(A, 0, n);
+        mergesort(A, p, r);
 
         System.out.println("Depois: ");
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i < r; i++) {
             System.out.println((i + 1) + " - " + A[i]);
         }
-
     }
 }
